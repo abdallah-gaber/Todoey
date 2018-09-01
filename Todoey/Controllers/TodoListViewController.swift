@@ -66,7 +66,7 @@ class TodoListViewController: UITableViewController {
         saveData()
 
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
 //        if itemArray[indexPath.row].done == true {
 //           tableView.cellForRow(at: indexPath)?.accessoryType = .none
 //        } else {
@@ -127,14 +127,50 @@ class TodoListViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    func loadItems() {
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
         do {
             itemArray = try context.fetch(request)
         } catch {
             print("Error fetching data from context \(error)")
         }
+        
+        tableView.reloadData()
     }
 
+}
+
+//MARK: - Search bar methods
+
+extension TodoListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        if searchBar.text! != "" {
+            
+            let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+
+            request.predicate = predicate
+
+            let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+
+            request.sortDescriptors = [sortDescriptor]
+
+        }
+        
+        loadItems(with: request)
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        print("Entered Searchbar textDidChange :: \(searchBar.text!)")
+        if searchBar.text?.count == 0{
+//            print("Count = 0")
+            loadItems()
+            
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
 }
 
