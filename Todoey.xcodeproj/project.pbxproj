@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2077CC8213A9459009392C6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2077CC7213A9459009392C6 /* CategoryViewController.swift */; };
 		D234AED42136B23900F3D6CB /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D234AED22136B23900F3D6CB /* DataModel.xcdatamodeld */; };
 		D2D6BD6121358A2200C1D3FF /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D6BD6021358A2200C1D3FF /* CategoryItem.swift */; };
 		D2EB833F2134397F00DB0BA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EB833E2134397F00DB0BA2 /* AppDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D2077CC7213A9459009392C6 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		D234AED32136B23900F3D6CB /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		D2D6BD6021358A2200C1D3FF /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		D2EB833B2134397F00DB0BA2 /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +53,7 @@
 		D2D6BD632135951D00C1D3FF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D2077CC7213A9459009392C6 /* CategoryViewController.swift */,
 				D2EB83402134397F00DB0BA2 /* TodoListViewController.swift */,
 			);
 			path = Controllers;
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2077CC8213A9459009392C6 /* CategoryViewController.swift in Sources */,
 				D2EB83412134397F00DB0BA2 /* TodoListViewController.swift in Sources */,
 				D234AED42136B23900F3D6CB /* DataModel.xcdatamodeld in Sources */,
 				D2D6BD6121358A2200C1D3FF /* CategoryItem.swift in Sources */,

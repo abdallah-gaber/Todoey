@@ -13,6 +13,12 @@ class TodoListViewController: UITableViewController {
 
 
     var itemArray = [Item]()
+    
+    var selectedCategory : Category? {
+        didSet{
+            loadItems()
+        }
+    }
 
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
 
@@ -24,7 +30,7 @@ class TodoListViewController: UITableViewController {
 
         print(dataFilePath!)
 
-        loadItems()
+//        loadItems()
 
 
 //        if let items = defaults.array(forKey: "TodoListArray") as? [CategoryItem] {
@@ -84,12 +90,13 @@ class TodoListViewController: UITableViewController {
             //What will happen once the user clicks the add Item button on our UIAlert
             let textFieldValue = alert.textFields![0].text!
 
-            let newCategoryItem = Item(context: self.context)
+            let newItem = Item(context: self.context)
 
-            newCategoryItem.title = textFieldValue
-            newCategoryItem.done = false
+            newItem.title = textFieldValue
+            newItem.done = false
+            newItem.parentCategory = self.selectedCategory
 
-            self.itemArray.append(newCategoryItem)
+            self.itemArray.append(newItem)
 
             self.saveData()
 
@@ -128,6 +135,13 @@ class TodoListViewController: UITableViewController {
     }
 
     func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+        let predicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        if request.predicate == nil {
+        request.predicate = predicate
+        }else {
+            let andPredicate = NSCompoundPredicate(type: .and, subpredicates: [request.predicate!, predicate])
+            request.predicate = andPredicate
+        }
         do {
             itemArray = try context.fetch(request)
         } catch {
